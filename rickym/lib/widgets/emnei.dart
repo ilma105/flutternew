@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon/pages/details_page.dart';
-import 'package:pokemon/widgets/power_badge.dart';
+import 'package:rickym/widgets/power_badge.dart';
+
+import '../pages/details_page.dart';
 
 class pokemoncard extends StatelessWidget {
   
-  final String name;
-  final List<String> types;
-final String imageurl;
+  final String year;
+final String category;
 final Map?  pokemonMap;
+
   const pokemoncard({
-    super.key,required this.name,required this.types,required this.imageurl,
-    required this.pokemonMap
+    super.key,required this.year,required this.category,    required this.pokemonMap
   });
 
   @override
@@ -18,7 +18,7 @@ final Map?  pokemonMap;
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=>DetailsPage(data: pokemonMap) ),
+           MaterialPageRoute(builder: (context)=>DetailsPage(data: pokemonMap) ),
         );
       },
       child: Stack(
@@ -37,12 +37,17 @@ final Map?  pokemonMap;
               mainAxisAlignment: MainAxisAlignment.center,
           
               children: [
-                Text("$name",
+                Text("$year",
                 style: TextStyle(color: Colors.white,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,),
                 ),
-          powerbadge(text:"${types[0]}"),
+         
+        
+         
+         
+          powerbadge(text:"${category}"),
+
               // powerbadge(text:"${types[1]}"),
           
               ],
@@ -50,12 +55,6 @@ final Map?  pokemonMap;
           ),
           
           ),
-        Positioned(
-          right: 0,
-           bottom: 0 ,
-          child: Hero(
-            tag:"pokecard-${name}",
-            child: Image.network("$imageurl",width: 85.0,))),     
        
         ],
       ),

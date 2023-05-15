@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon/pages/details_page.dart';
-import 'package:pokemon/widgets/power_badge.dart';
+import 'package:rickym/widgets/power_badge.dart';
+
+import '../pages/home_page.dart';
 
 class pokemoncard extends StatelessWidget {
   
-  final String name;
-  final List<String> types;
-final String imageurl;
-final Map?  pokemonMap;
+  final String year;
+final String category;
+final String image;
+
+final Color color;
+// final Map?  pokemonMap;
+final List<Map>?  nobelMap;
+final String species;
+final String gender;
+final String org;
+final String loc;
   const pokemoncard({
-    super.key,required this.name,required this.types,required this.imageurl,
-    required this.pokemonMap
+    super.key,required this.year,required this.category,required this.species,required this.image, required this.nobelMap,required this.color,required this.loc,
+    required this.org,required this.gender
   });
 
   @override
@@ -18,7 +26,7 @@ final Map?  pokemonMap;
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=>DetailsPage(data: pokemonMap) ),
+           MaterialPageRoute(builder: (context)=>HomePage(loc: loc, gender: gender, name: year, origin: org),)
         );
       },
       child: Stack(
@@ -28,7 +36,7 @@ final Map?  pokemonMap;
             width:double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: Color.fromARGB(255, 77, 147, 170),
+              color: color,
               ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -37,12 +45,19 @@ final Map?  pokemonMap;
               mainAxisAlignment: MainAxisAlignment.center,
           
               children: [
-                Text("$name",
+                Text("$year",
                 style: TextStyle(color: Colors.white,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,),
                 ),
-          powerbadge(text:"${types[0]}"),
+         
+        
+         
+         
+          powerbadge(text:"${category}"),
+                    powerbadge(text:"${species}"),
+
+
               // powerbadge(text:"${types[1]}"),
           
               ],
@@ -50,13 +65,15 @@ final Map?  pokemonMap;
           ),
           
           ),
-        Positioned(
-          right: 0,
-           bottom: 0 ,
-          child: Hero(
-            tag:"pokecard-${name}",
-            child: Image.network("$imageurl",width: 85.0,))),     
-       
+           Positioned(
+            right: 0,
+            bottom: 0,
+             child: Image.network("${image}",
+             width: 50.0,
+             height: 60.0,
+             ),
+           )
+
         ],
       ),
     );
